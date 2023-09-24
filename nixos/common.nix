@@ -5,7 +5,6 @@
     [ # Include the results of the hardware scan.
       <home-manager/nixos>
       ./pkgs_override.nix
-      ./applications/tailscale.nix
       ./applications/neovim.nix
     ];
 
@@ -23,9 +22,12 @@
     python311Packages.pip
     ripgrep
     rsync
+    tailscale
     unzip
     wget
   ];
+
+  services.tailscale.enable = true;
 
   system.stateVersion = "23.05"; 
 }
