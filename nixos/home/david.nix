@@ -53,12 +53,6 @@
       source = ../../config;
       recursive = true;
     };
-
-    programs.git = {
-      enable = true;
-      userName = "David Swanlund";
-      userEmail = "10473778+TheTinHat@users.noreply.github.com";
-    };
     
     programs.bash = {
       enable = true;
@@ -90,24 +84,4 @@
     dataDir = "/home/david/";
   };
 
-  # RSync backup job
-  systemd.services."rsync-backup" = {
-    path = [ pkgs.rsync pkgs.openssh ];
-    script = ''
-      rsync -avh /home/david/ admin@192.168.1.200:/mnt/rust/archives/backups/nixos-desktop-backup/
-      '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = "david";
-    };
-  };
-
-  systemd.timers."rsync-backup" = {
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      Unit = "rsync-backup.service";
-      OnCalendar = "hourly";
-      Persistent = true;
-    };
-  }; 
   }
