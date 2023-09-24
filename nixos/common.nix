@@ -17,7 +17,6 @@
     gcc
     git
     htop
-    nerdfonts
     python311
     python311Packages.pip
     ripgrep
@@ -27,6 +26,12 @@
     wget
   ];
 
+  programs.git = {
+    enable = true;
+    userName = "David Swanlund";
+    userEmail = "10473778+TheTinHat@users.noreply.github.com";
+  };
+  
   services.tailscale.enable = true;
 
   system.stateVersion = "23.05"; 
