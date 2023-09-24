@@ -67,6 +67,12 @@
       };
     };
 
+    programs.git = {
+      enable = true;
+      userName = "David Swanlund";
+      userEmail = "10473778+TheTinHat@users.noreply.github.com";
+    };
+  
     programs.gnome-terminal.themeVariant = "dark";
 
     services.gpg-agent = {
