@@ -11,14 +11,28 @@
   time.timeZone = "America/Vancouver";
   i18n.defaultLocale = "en_CA.UTF-8";
 
+  users.users.david = {
+    isNormalUser = true;
+    description = "David";
+    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
+  };
+
+  security.sudo.extraRules = [
+    { users = [ "david" ];
+      commands = [
+        {
+          command = "ALL";
+	        options = [ "NOPASSWD" ];
+	      }
+      ];
+    }
+  ];
+
   environment.systemPackages = with pkgs; [
     curl
-    flatpak
     gcc
     git
     htop
-    python311
-    python311Packages.pip
     ripgrep
     rsync
     tailscale
