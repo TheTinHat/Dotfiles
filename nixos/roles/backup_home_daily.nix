@@ -16,7 +16,7 @@
     wantedBy = [ "timers.target" ];
     timerConfig = {
       Unit = "rsync-backup.service";
-      OnCalendar = "daily";
+      OnCalendar = "hourly";
       Persistent = true;
     };
   }; 
