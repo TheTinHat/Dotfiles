@@ -3,14 +3,11 @@
   imports =
     [ 
       ./hardware-configuration.nix
+      ./disko-config.nix
       "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
       ../../common.nix
       ../../home/david.nix
     ];
-
-  disko.devices = import ./disko-config.nix { 
-    disks = [ "/dev/vda" ];
-  };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

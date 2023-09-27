@@ -1,4 +1,5 @@
 { ... } : {
+  disko.devices = {
     disk = {
         vda = {
             type = "disk";
@@ -67,4 +68,5 @@
                 };
             };
         };
+    };
   }
