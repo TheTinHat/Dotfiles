@@ -55,6 +55,9 @@
           keyformat = "passphrase";
           compression = "lz4";
         };
+        postCreateHook = ''
+          zfs set keylocation="prompt" "zroot";
+        '';
         datasets = {
           "safe" = {
             type = "zfs_fs";
