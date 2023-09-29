@@ -1,11 +1,11 @@
-{ disks ? [ "/dev/nvme0n1" ]
+{ disks ? [ "/dev/vda" ]
 , zpoolName ? "zpool"
 , zpoolHome ? true
 , zpoolTmp ? false
 , zpoolDocker ? false
+, lib
 , ...
 }:
-{ lib, ... }:
 {
   disko.devices = {
     disk = {
@@ -45,22 +45,25 @@
       };
     };
     zpool = {
-      "${zpoolName}" = {
+      zroot = {
         type = "zpool";
+        options = {
+          ashift = "12";
+          autotrim = "on";
+        };
         rootFsOptions = {
           mountpoint = "none";
           acltype = "posixacl";
           xattr = "sa";
           atime = "off";
-          ashift = "12";
           encryption = "on";
           keyformat = "passphrase";
+          compression = "lz4";
         };
         datasets = {
           "safe" = {
             type = "zfs_fs";
             options.mountpoint = "none";
-            options.compression = "lz4";
             options."com.sun:auto-snapshot" = "true";
           };
           "safe/root" = {
@@ -71,7 +74,6 @@
           "local" = {
             type = "zfs_fs";
             options.mountpoint = "none";
-            options.compression = "lz4";
           };
           "local/reserved" = {
             type = "zfs_fs";
