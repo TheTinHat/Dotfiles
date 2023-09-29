@@ -51,22 +51,17 @@
                           zfs set keylocation="prompt" "zroot/$name";
                         '';
                     };
-                  "root" = {
+                  "encrypted/root" = {
                       mountpoint = "/";
                       type = "zfs_fs";
-                      options.mountpoint = "legacy";
-                      postCreateHook = "zfs snapshot zroot@blank";
                     };
-                  "root/nix" = {
+                  "encrypted/root/nix" = {
                       mountpoint = "/nix";
                       type = "zfs_fs";
-                      options.mountpoint = "legacy";
                     };
-                  "root/home" = {
+                  "encrypted/root/home" = {
                       mountpoint = "/home";
                       type = "zfs_fs";
-                      options.mountpoint = "legacy";
-                      postCreateHook = "zfs snapshot zroot@blank";
                       options."com.sun:auto-snapshot" = "true";
                     };
                 };

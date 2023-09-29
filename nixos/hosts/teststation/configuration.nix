@@ -1,17 +1,17 @@
-{  ...}:
+{ ... }:
 {
   imports =
-    [ 
+    [
       ./hardware-configuration.nix
       ./disko-config.nix
       "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
       # ../../common.nix
       # ../../home/david.nix
     ];
-   boot.loader.grub.devices = [ "/dev/vda" ];
-   boot.loader.grub.enable = true;
-   boot.loader.grub.efiSupport = true;
-   boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.grub.devices = [ "/dev/vda" ];
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.efiInstallAsRemovable = true;
 
   networking.hostName = "teststation"; # Define your hostname.
   networking.hostId = "deadb33f";
