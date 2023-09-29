@@ -3,9 +3,9 @@
 , zpoolHome ? true
 , zpoolTmp ? false
 , zpoolDocker ? false
-, lib
 , ...
 }:
+{ lib, ... }:
 {
   disko.devices = {
     disk = {

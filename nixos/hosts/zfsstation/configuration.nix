@@ -2,6 +2,7 @@
 
 {
   imports = [
+    "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
     (import ./disko-config.nix {
       disks = [ "/dev/vda" ];
       zpoolName = config.networking.hostName;
