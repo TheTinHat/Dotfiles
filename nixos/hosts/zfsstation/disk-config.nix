@@ -1,11 +1,6 @@
 { disks ? [ "/dev/vda" ]
-, zpoolName ? "zpool"
-, zpoolHome ? true
-, zpoolTmp ? false
-, zpoolDocker ? false
 , ...
 }:
-{ lib, ... }:
 {
   disko.devices = {
     disk = {
@@ -85,19 +80,16 @@
             options.mountpoint = "legacy";
             mountpoint = "/nix";
           };
-        } // lib.optionalAttrs zpoolHome {
           "safe/home" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             mountpoint = "/home";
           };
-        } // lib.optionalAttrs zpoolTmp {
           "local/tmp" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             mountpoint = "/tmp";
           };
-        } // lib.optionalAttrs zpoolDocker {
           "local/docker" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
