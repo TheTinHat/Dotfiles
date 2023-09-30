@@ -51,47 +51,52 @@
           acltype = "posixacl";
           xattr = "sa";
           atime = "off";
-          encryption = "on";
-          keyformat = "passphrase";
-          keylocation = "prompt";
-          compression = "lz4";
         };
         datasets = {
-          "safe" = {
+          "zfs" = {
+            type = "zfs_fs";
+            options.mountpoint = "none";
+            rootFsOptions = {
+              encryption = "on";
+              keyformat = "passphrase";
+              keylocation = "prompt";
+            };
+          };
+          "zfs/safe" = {
             type = "zfs_fs";
             options.mountpoint = "none";
             options."com.sun:auto-snapshot" = "true";
           };
-          "safe/root" = {
+          "zfs/safe/root" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             mountpoint = "/";
           };
-          "local" = {
+          "zfs/local" = {
             type = "zfs_fs";
             options.mountpoint = "none";
           };
-          "local/reserved" = {
+          "zfs/local/reserved" = {
             type = "zfs_fs";
             options.mountpoint = "none";
             options.refreservation = "2G";
           };
-          "local/nix" = {
+          "zfs/local/nix" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             mountpoint = "/nix";
           };
-          "safe/home" = {
+          "zfs/safe/home" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             mountpoint = "/home";
           };
-          "local/tmp" = {
+          "zfs/local/tmp" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             mountpoint = "/tmp";
           };
-          "local/docker" = {
+          "zfs/local/docker" = {
             type = "zfs_fs";
             options.mountpoint = "legacy";
             mountpoint = "/var/lib/docker";
