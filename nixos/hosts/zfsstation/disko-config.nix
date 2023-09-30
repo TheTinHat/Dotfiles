@@ -1,4 +1,4 @@
-{ disks ? [ "/dev/vda" ]
+{ disks ? [ "/dev/sda" ]
 , ...
 }:
 {
@@ -79,7 +79,7 @@
           "zfs/local/reserved" = {
             type = "zfs_fs";
             options.mountpoint = "none";
-            options.refreservation = "2G";
+            options.refreservation = "5G";
           };
           "zfs/local/nix" = {
             type = "zfs_fs";
