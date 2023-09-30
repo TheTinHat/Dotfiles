@@ -18,6 +18,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 3;
   boot.zfs.requestEncryptionCredentials = true;
+  boot.zfs.devNodes = "/dev/disk/by-path";
 
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
@@ -74,4 +75,5 @@
   system.stateVersion = "23.05"; # Did you read the comment?
 
 }
+
 
