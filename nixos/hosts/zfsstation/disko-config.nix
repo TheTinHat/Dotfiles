@@ -55,8 +55,8 @@
         datasets = {
           "zfs" = {
             type = "zfs_fs";
-            options.mountpoint = "none";
-            rootFsOptions = {
+            options = {
+              mountpoint = "none";
               encryption = "on";
               keyformat = "passphrase";
               keylocation = "prompt";
