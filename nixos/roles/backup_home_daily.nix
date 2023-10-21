@@ -1,11 +1,11 @@
-{ pkgs, ...}: {
+{ pkgs, ... }: {
   # RSync backup job
   systemd.services."rsync-backup" = {
     path = [ pkgs.rsync pkgs.openssh ];
     script = ''
       BACKUP_PATH="/mnt/rust/archives/backups/nix-homes/$HOSTNAME/"
-      rsync -avR --mkpath /home/ admin@192.168.1.200:$BACKUP_PATH
-      '';
+      rsync -avR --delete --mkpath /home/ admin@192.168.1.200:$BACKUP_PATH
+    '';
     serviceConfig = {
       Type = "oneshot";
       User = "root";
@@ -19,5 +19,5 @@
       OnCalendar = "hourly";
       Persistent = true;
     };
-  }; 
+  };
 }
