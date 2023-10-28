@@ -14,7 +14,6 @@
     libreoffice
     tor-browser-bundle-bin
     chromium
-    vscodium
     steam
     inkscape
     gimp

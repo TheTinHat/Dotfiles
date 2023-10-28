@@ -1,11 +1,11 @@
-{ ...}:
+{ ... }:
 {
   home-manager.users.david = { ... }: {
     home.file.".config" = {
       source = ../../config;
       recursive = true;
     };
-    
+
     programs.bash = {
       enable = true;
       shellAliases = {
@@ -24,14 +24,14 @@
       userName = "David Swanlund";
       userEmail = "10473778+TheTinHat@users.noreply.github.com";
     };
-  
+
     services.gpg-agent = {
       enable = true;
       defaultCacheTtl = 43200;
       enableSshSupport = true;
     };
 
-    home.stateVersion = "23.05";   
+    home.stateVersion = "23.05";
   };
 
-  }
+}

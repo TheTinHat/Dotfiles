@@ -1,30 +1,33 @@
-{ ... }:
+{ config, pkgs, lib, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../../common.nix
-      ../../home/david.nix
-      ../../roles/standard_desktop.nix
-      ../../roles/standard_dev.nix
-      ../../roles/backup_home_daily.nix
-      ../../roles/virtualization.nix
-    ];
+  imports = [
+    "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
+    (import ./disko-config.nix {
+      disks = [ "/dev/vda" ];
+    })
 
+    ./hardware-configuration.nix
+    ../../roles/standard_dev.nix
+    ../../roles/standard_desktop.nix.nix
+    #../../roles/backup_home_daily.nix
+  ];
+
+  # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 50;
+  boot.loader.systemd-boot.editor = false;
+  boot.loader.systemd-boot.consoleMode = "auto";
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.timeout = 3;
+  boot.zfs.requestEncryptionCredentials = true;
+  boot.zfs.devNodes = "/dev/disk/by-path";
 
-  # Setup keyfile
-  boot.initrd.secrets = {
-    "/crypto_keyfile.bin" = null;
-  };
+  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
-  # Enable swap on luks
-  boot.initrd.luks.devices."luks-3538d39a-6a5b-481e-a85a-f25141900c7b".device = "/dev/disk/by-uuid/3538d39a-6a5b-481e-a85a-f25141900c7b";
-  boot.initrd.luks.devices."luks-3538d39a-6a5b-481e-a85a-f25141900c7b".keyFile = "/crypto_keyfile.bin";
+  networking.hostName = "zork"; # Define your hostname.
+  networking.hostId = "05ee9e42"; # cut -c-8 </proc/sys/kernel/random/uuid
 
-  networking.hostName = "nixstation"; # Define your hostname.
   networking.networkmanager.enable = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -53,9 +56,6 @@
     xkbVariant = "";
   };
 
-  services.printing.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
-
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -68,4 +68,15 @@
     #media-session.enable = true;
   };
 
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "23.05"; # Did you read the comment?
+
 }
+
+
