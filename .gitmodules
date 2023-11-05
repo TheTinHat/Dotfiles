@@ -1,0 +1,3 @@
+[submodule "neovim"]
+	path = config/neovim
+	url = https://github.com/TheTinHat/neovim
