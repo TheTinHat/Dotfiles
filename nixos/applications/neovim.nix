@@ -16,7 +16,7 @@
     fd
     git
     lazygit
-    neovim
+    neovim-unwrapped
     nerdfonts
     ripgrep
     unstable.cargo
