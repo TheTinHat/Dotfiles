@@ -16,6 +16,7 @@
         alfred = "ssh alfred@alfred.wolf-atlas.ts.net";
         rust = "ssh admin@rust.wolf-atlas.ts.net";
         myip = "curl ifconfig.me && echo -e ''";
+        fixit = "nix run nixpkgs#patchelf -- --set-interpreter '$(nix eval nixpkgs#stdenv.cc.bintools.dynamicLinker --raw)'";
       };
     };
 
