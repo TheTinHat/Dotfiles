@@ -9,5 +9,9 @@
     python311Packages.pip
     terraform
     vscodium
+    go
+    gopls 
+    gotools 
+    go-tools
   ];
 }
